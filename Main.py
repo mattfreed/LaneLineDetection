@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-def canny (image):
+def cannyDisplay (image):
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     blur = cv2.GaussianBlur(gray, (5, 5), 0)
     canny = cv2.Canny(blur, 50, 150)
@@ -28,8 +28,8 @@ def display_Lines(image, lines):
 image = cv2.imread('Picture/test_image.jpg')
 lane_image = np.copy(image)
 lane_image2 = np.copy(image)
-canny = canny(lane_image)
-croppedImage = regionOfInterest(canny)
+cannyImage = cannyDisplay(lane_image)
+croppedImage = regionOfInterest(cannyImage)
 lines = cv2.HoughLinesP(croppedImage, 2, np.pi/180, 100, np.array([]), minLineLength=40, maxLineGap=5)
 line_image = display_Lines(lane_image2, lines)
 comboImage = cv2.addWeighted(lane_image2, 0.8, line_image, 1, 1)
